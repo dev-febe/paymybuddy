@@ -1,0 +1,17 @@
+.brand-logo {
+    display: inline-block;
+    border-radius: 5px;
+    margin-left: 4.8em !important;
+}
+.primary-color {
+    color: #fff!important;
+    background-color: #74B666!important;
+    border-color: #74B666!important;
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #3975D5!important;
+}
+
+th {
+    padding: 20px!important;
+}

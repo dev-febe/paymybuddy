@@ -5,12 +5,13 @@
     <title>Login</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <script src="https://use.fontawesome.com/5287b15aba.js"></script>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="container">
     <div class="row align-items-center justify-content-center" style="min-height: 500px;">
-        <form class="col-5 justify-content-center" style="border: 1px solid darkgrey; border-radius: 5px 5px" method="POST" th:action="@{/login}">
-            <h3 class="mt-5 mb-5 text-center">Pay My Buddy</h3>
+        <form class="col-5 flex-column justify-content-center" style="border: 1px solid darkgrey; border-radius: 5px 5px" method="POST" th:action="@{/login}">
+            <h3 class="mt-5 mb-5 ml-5 p-3 text-center brand-logo primary-color">Pay My Buddy</h3>
             <div th:if="${param.error}" class="alert alert-error">
                 Invalid username and password.
             </div>

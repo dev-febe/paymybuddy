@@ -8,11 +8,9 @@ public class Contact {
 
     public Contact() { }
 
-    public Contact(Long id, String name, User owner, User user) {
+    public Contact(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.owner = owner;
-        this.user = user;
     }
 
     public Long getId() {

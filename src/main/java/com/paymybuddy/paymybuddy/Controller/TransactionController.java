@@ -1,9 +1,10 @@
 package com.paymybuddy.paymybuddy.Controller;
 
-import com.paymybuddy.paymybuddy.Dao.ContactDao;
-import com.paymybuddy.paymybuddy.Dao.TransferDao;
+import com.paymybuddy.paymybuddy.Dto.TransactionDto;
 import com.paymybuddy.paymybuddy.Model.Contact;
-import com.paymybuddy.paymybuddy.Model.Transfer;
+import com.paymybuddy.paymybuddy.Model.Transaction;
+import com.paymybuddy.paymybuddy.Service.ContactService;
+import com.paymybuddy.paymybuddy.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,31 +16,41 @@ import java.util.List;
 
 @Controller
 public class TransactionController {
-    ContactDao contactDao;
-    TransferDao transferDao;
+    ContactService contactService;
+    TransactionService transactionService;
 
     @Autowired
-    TransactionController(ContactDao contactDao, TransferDao transferDao) {
-        this.contactDao = contactDao;
-        this.transferDao = transferDao;
+    TransactionController(ContactService contactService, TransactionService transactionService) {
+        this.contactService = contactService;
+        this.transactionService = transactionService;
     }
 
-    @GetMapping("/transfer")
+    @GetMapping("/transactions")
     public String getTransactions(Model model) {
-        List<Contact> connections = this.contactDao.findByUserId(1L);
+        List<Contact> connections = this.contactService.getContactsByUser(1L);
 
-        List<Transfer> transactions = this.transferDao.findTransferByUserId(1L);
+        List<Transaction> transactions = this.transactionService.getTransactionsByUser(1L);
 
-        model.addAttribute("transfer", new Transfer());
+        model.addAttribute("transaction", new TransactionDto());
         model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions);
 
         return "transaction";
     }
 
-    @PostMapping("/transfer")
-    public String submitForm(@ModelAttribute Transfer transfer) {
+    @PostMapping("/transactions")
+    public String submitForm(@ModelAttribute TransactionDto transaction, Model model) {
+        List<Contact> connections = this.contactService.getContactsByUser(1L);
+        transaction.setUserId(1L);
+        transaction.setType("TRANSACTION");
+        transaction.setStatus("DONE");
 
+        this.transactionService.saveTransaction(transaction);
+
+        List<Transaction> transactions = this.transactionService.getTransactionsByUser(1L);
+        model.addAttribute("transaction", new TransactionDto());
+        model.addAttribute("connections", connections);
+        model.addAttribute("transactions", transactions);
         return "transaction";
     }
 }

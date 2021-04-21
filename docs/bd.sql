@@ -7,7 +7,7 @@ CREATE DATABASE paymybuddy;
 USE paymybuddy;
 
 CREATE TABLE user (
-`id` INT NOT NULL,
+`id` INT NOT NULL AUTO_INCREMENT,
 `firstName` VARCHAR(255) DEFAULT NULL,
 `lastName` VARCHAR(255) DEFAULT NULL,
 `password` VARCHAR(255) DEFAULT NULL,
@@ -25,7 +25,7 @@ INSERT INTO user (`id`,`firstName`,`lastName`, `username`, `password`,`email`,`b
 (5,'Detty Romaric','Gueu', 'gueu', '123456','gueu@gmail.com', 100000);
 
 CREATE TABLE contact (
-`id` INT NOT NULL,
+`id` INT NOT NULL AUTO_INCREMENT,
 `user_id` INT NOT NULL,
 `owner_id` INT NOT NULL,
 `name` VARCHAR(255) NOT NULL,
@@ -40,7 +40,7 @@ INSERT INTO contact (`id`, `user_id`, `owner_id`, `name`) VALUES
 (3, 4, 1, "Guy");
 
 CREATE TABLE transaction (
-`id` INT NOT NULL,
+`id` INT NOT NULL AUTO_INCREMENT,
 `user_id` INT NOT NULL,
 `contact_id` INT,
 `amount` DOUBLE NOT NULL,
