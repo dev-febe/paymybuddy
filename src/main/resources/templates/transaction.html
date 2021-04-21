@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Pay My Buddy</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-        <a class="navbar-brand" href="#">Pay My buddy</a>
+        <a class="navbar-brand brand" href="#">Pay My buddy</a>
         <div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -32,7 +33,7 @@
     <nav class="mb-5 navbar navbar-expand-lg navbar-light bg-light">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home </a>
+                <a class="nav-link" href="#">Home /</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Transfer </a>
@@ -45,20 +46,20 @@
             <button class="btn btn-primary">Add connection</button>
         </div>
         <div class="pt-5 pb-5 bg-light">
-            <form class="form-inline justify-content-center" method="post" th:action="@{/transfer}" th:object="${transfer}">
-                <select th:field="*{contact}" class="form-control m-2" aria-label="Default select example">
-                    <option selected value="0">Select a connection</option>
-                    <option th:each="connection :${connections}" th:object="${connection}"
-                            th:text="${connection.name}">One
-                    </option>
-                </select>
-                <label class="m-2">
-                    <input th:field="*{amount}" class="form-control" type="number" min="1" placeholder="amount">
-                </label>
-                <label class="m-2">
-                    <input th:field="*{description}" class="form-control" type="number" min="1" placeholder="description">
-                </label>
-                <button class="btn btn-primary m-2 pl-5 pr-5">Pay</button>
+            <form class="form-inline justify-content-center" method="post" th:action="@{/transactions}" th:object="${transaction}">
+            <select th:field="*{contactId}" class="form-control m-2" aria-label="Default select example">
+                <option selected value="0">Select a connection</option>
+                <option th:each="connection :${connections}"
+                        th:text="${connection.name}" th:value="${connection.id}">One
+                </option>
+            </select>
+            <label class="m-2">
+                <input th:field="*{amount}" class="form-control" type="number" min="1" placeholder="0,0">
+            </label>
+            <label class="m-2">
+                <input th:field="*{description}" class="form-control" type="text" min="1" placeholder="description">
+            </label>
+            <button class="btn btn-primary m-2 pl-5 pr-5 primary-color">Pay</button>
             </form>
         </div>
         <div class="d-flex flex-column align-content-center">
@@ -66,16 +67,16 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Connections</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col" class="primary-color">Connections</th>
+                    <th scope="col" class="primary-color">Description</th>
+                    <th scope="col" class="primary-color">Amount</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="transfer: ${transactions}">
-                    <td th:text="${transfer.contact.name}"></td>
-                    <td th:text="${transfer.transaction.description}"></td>
-                    <td th:text="${transfer.transaction.amount}">€</td>
+                <tr th:each="transaction: ${transactions}">
+                    <td><span th:text="${transaction.contact.name}"></span></td>
+                    <td><span th:text="${transaction.description}"></span></td>
+                    <td><span th:text="${transaction.amount}"></span>€</td>
                 </tr>
                 </tbody>
             </table>
