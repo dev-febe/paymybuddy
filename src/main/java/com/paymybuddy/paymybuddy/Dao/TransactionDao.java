@@ -20,8 +20,10 @@ public class TransactionDao extends JdbcDaoSupport {
     }
 
     public List<Transaction> findTransferByUserId(Long userId) {
+        Object[] params = new Object[]{userId};
         return (this.getJdbcTemplate() != null
-                ? this.getJdbcTemplate().query(TransactionMapper.BASE_SQL, new TransactionMapper())
+                ? this.getJdbcTemplate()
+                .query(TransactionMapper.BASE_SQL + " where u.id = ?", new TransactionMapper(), params)
                 : null);
     }
 

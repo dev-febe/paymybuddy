@@ -3,8 +3,10 @@ package com.paymybuddy.paymybuddy.Controller;
 import com.paymybuddy.paymybuddy.Dto.TransactionDto;
 import com.paymybuddy.paymybuddy.Model.Contact;
 import com.paymybuddy.paymybuddy.Model.Transaction;
+import com.paymybuddy.paymybuddy.Model.User;
 import com.paymybuddy.paymybuddy.Service.ContactService;
 import com.paymybuddy.paymybuddy.Service.TransactionService;
+import com.paymybuddy.paymybuddy.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,18 +20,26 @@ import java.util.List;
 public class TransactionController {
     ContactService contactService;
     TransactionService transactionService;
+    UserService userService;
 
     @Autowired
-    TransactionController(ContactService contactService, TransactionService transactionService) {
+    TransactionController(ContactService contactService, TransactionService transactionService, UserService userService) {
         this.contactService = contactService;
         this.transactionService = transactionService;
+        this.userService = userService;
     }
 
     @GetMapping("/transactions")
     public String getTransactions(Model model) {
-        List<Contact> connections = this.contactService.getContactsByUser(1L);
+        User connectedUser = this.userService.getConnectedUser();
 
-        List<Transaction> transactions = this.transactionService.getTransactionsByUser(1L);
+        List<Contact> connections = this
+                .contactService
+                .getContactsByUser(connectedUser.getId());
+
+        List<Transaction> transactions = this
+                .transactionService
+                .getTransactionsByUser(connectedUser.getId());
 
         model.addAttribute("transaction", new TransactionDto());
         model.addAttribute("connections", connections);
@@ -40,14 +50,22 @@ public class TransactionController {
 
     @PostMapping("/transactions")
     public String submitForm(@ModelAttribute TransactionDto transaction, Model model) {
-        List<Contact> connections = this.contactService.getContactsByUser(1L);
+        User connectedUser = this.userService.getConnectedUser();
+
+        List<Contact> connections = this
+                .contactService
+                .getContactsByUser(connectedUser.getId());
+
         transaction.setUserId(1L);
         transaction.setType("TRANSACTION");
         transaction.setStatus("DONE");
 
         this.transactionService.saveTransaction(transaction);
 
-        List<Transaction> transactions = this.transactionService.getTransactionsByUser(1L);
+        List<Transaction> transactions = this
+                .transactionService
+                .getTransactionsByUser(connectedUser.getId());
+
         model.addAttribute("transaction", new TransactionDto());
         model.addAttribute("connections", connections);
         model.addAttribute("transactions", transactions);

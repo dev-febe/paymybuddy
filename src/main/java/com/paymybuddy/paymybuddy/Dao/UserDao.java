@@ -18,12 +18,12 @@ public class UserDao extends JdbcDaoSupport {
         this.setDataSource(dataSource);
     }
 
-    public User findOneById(Long id) {
-        Object[] params = new Object[]{id};
-        String sql = UserMapper.BASE_SQL + " where u.id = ?";
-        return (User) (this.getJdbcTemplate() != null ? this.getJdbcTemplate()
-                .queryForObject(sql,
-                        new BeanPropertyRowMapper<User>(User.class),
-                        params) : null);
+    public User findOneByUsername(String username) {
+        Object[] params = new Object[]{username};
+        System.out.println(username);
+        String sql = UserMapper.BASE_SQL + " where u.username = ?";
+        return this
+                .getJdbcTemplate()
+                .queryForObject(sql, new BeanPropertyRowMapper<>(User.class), params);
     }
 }

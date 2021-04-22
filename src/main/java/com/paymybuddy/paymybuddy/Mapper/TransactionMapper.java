@@ -14,7 +14,7 @@ public class TransactionMapper implements RowMapper<Transaction> {
             = "Select c.id as contactId, c.name as contactName, o.id as ownerId, o.firstName as ownerFirstName, o.lastName as ownerLastName, " +
             "o.password as ownerPassword, o.email as ownerEmail, o.balance as ownerBalance, " +
             "ts.id as transactionId, ts.amount, ts.status, ts.description, ts.type, " +
-            "u.id as userId, u.firstName, u.lastName, u.password, u.email, u.balance " +
+            "u.id as userId,  u.username, u.firstName, u.lastName, u.password, u.email, u.balance " +
             "From transaction ts " +
             "Left Join contact c ON c.id = ts.contact_id " +
             "Left Join user u ON u.id = ts.user_id " +
@@ -32,7 +32,8 @@ public class TransactionMapper implements RowMapper<Transaction> {
                 resultSet.getString("lastName"),
                 resultSet.getString("password"),
                 resultSet.getString("email"),
-                resultSet.getString("balance")
+                resultSet.getString("balance"),
+                resultSet.getString("username")
         );
 
         Contact contact = new Contact(

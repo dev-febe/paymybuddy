@@ -19,8 +19,10 @@ public class ContactDao extends JdbcDaoSupport {
     }
 
     public List<Contact> findByUserId(Long userId) {
+        Object[] params = new Object[]{userId};
+
         return (getJdbcTemplate() != null ?
-                getJdbcTemplate().query(ContactMapper.BASE_SQL, new ContactMapper())
+                getJdbcTemplate().query(ContactMapper.BASE_SQL  + " where c.user_id = ?", new ContactMapper(), params)
                 : null);
     }
 }
