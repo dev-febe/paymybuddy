@@ -10,6 +10,13 @@ public class UserMapper implements RowMapper<User> {
     public static final String BASE_SQL
             = "Select u.id, u.username, u.firstName, u.LastName, u.password, u.email, u.balance From user u ";
 
+    public static final String INSERT
+            = "INSERT INTO user (firstname, lastname, username, email, password) " +
+            "VALUES (?, ?, ?, ?, ?)";
+
+    public static final String UPDATE_BALANCE
+            = "UPDATE user SET balance = ? WHERE id = ?";
+
     @Override
     public User mapRow(ResultSet resultSet, int i) throws SQLException {
         Long id = resultSet.getLong("id");
@@ -18,7 +25,7 @@ public class UserMapper implements RowMapper<User> {
         String lastName = resultSet.getString("lastName");
         String password = resultSet.getString("password");
         String email = resultSet.getString("email");
-        String balance = resultSet.getString("balance");
+        Double balance = resultSet.getDouble("balance");
 
         return new User(
                 id,
