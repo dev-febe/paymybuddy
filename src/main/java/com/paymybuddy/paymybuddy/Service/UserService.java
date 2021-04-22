@@ -1,6 +1,7 @@
 package com.paymybuddy.paymybuddy.Service;
 
 import com.paymybuddy.paymybuddy.Dao.UserDao;
+import com.paymybuddy.paymybuddy.Dto.UserDto;
 import com.paymybuddy.paymybuddy.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,5 +31,9 @@ public class UserService implements UserDetailsService {
                 .getName();
 
         return this.userDao.findOneByUsername(username);
+    }
+
+    public void saveUser(UserDto userDto) {
+        this.userDao.save(userDto);
     }
 }

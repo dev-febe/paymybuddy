@@ -32,7 +32,7 @@ public class TransactionMapper implements RowMapper<Transaction> {
                 resultSet.getString("lastName"),
                 resultSet.getString("password"),
                 resultSet.getString("email"),
-                resultSet.getString("balance"),
+                resultSet.getDouble("balance"),
                 resultSet.getString("username")
         );
 
