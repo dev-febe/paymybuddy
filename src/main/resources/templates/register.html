@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <script src="https://use.fontawesome.com/5287b15aba.js"></script>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <div class="row align-items-center justify-content-center" style="min-height: 500px;">
+        <form class="col-5 flex-column justify-content-center" style="border: 1px solid darkgrey; border-radius: 5px 5px"  action="#" method="post" th:action="@{/register}" th:object="${user}">
+            <h3 class="mt-5 mb-5 ml-5 p-3 text-center brand-logo primary-color">Pay My Buddy</h3>
+            <div class="mt-5 mb-3">
+                <label class="sr-only" for="firstname">firstname</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input th:field="*{firstName}" type="text" class="form-control" id="firstname" name="firstname" placeholder="firstname">
+                </div>
+            </div>
+            <div class="mt-4 mb-3">
+                <label class="sr-only" for="lastname">Lastname</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input th:field="*{lastName}"  type="text" class="form-control" id="lastname" name="lastname" placeholder="lastname">
+                </div>
+            </div>
+            <div class="mt-4 mb-3">
+                <label class="sr-only" for="email">Email</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input th:field="*{email}"  type="text" class="form-control" id="email" name="email" placeholder="email">
+                </div>
+            </div>
+            <div class="mt-4 mb-3">
+                <label class="sr-only" for="email">Username</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input th:field="*{username}" type="text" class="form-control" id="username" name="username" placeholder="username">
+                </div>
+            </div>
+            <div class="mt-4 mb-3">
+                <label class="sr-only" for="password">Password</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-asterisk" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input th:field="*{password}" type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="mt-5 mb-5 d-flex justify-content-center">
+                <button class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</body>
+</html>
