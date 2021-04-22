@@ -36,7 +36,7 @@ public class TransactionService {
         if (accountBalance < 0) {
             throw new Exception("Insufficient balance");
         }
-        accountBalance = accountBalance + (accountBalance * 0.5);
+        accountBalance = accountBalance + (accountBalance * 0.05);
 
         this.userDao.updateBalance(user.getId(), accountBalance);
 
