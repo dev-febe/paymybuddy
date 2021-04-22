@@ -33,8 +33,6 @@ public class TransactionService {
 
         double accountBalance = user.getBalance() - transactionDto.getAmount();
 
-        System.out.println(user.getBalance());
-        System.out.println(accountBalance);
         if (accountBalance < 0) {
             throw new Exception("Insufficient balance");
         }

@@ -1,6 +1,7 @@
 package com.paymybuddy.paymybuddy.Service;
 
 import com.paymybuddy.paymybuddy.Dao.TransactionDao;
+import com.paymybuddy.paymybuddy.Dao.UserDao;
 import com.paymybuddy.paymybuddy.Dto.TransactionDto;
 import com.paymybuddy.paymybuddy.Model.Contact;
 import com.paymybuddy.paymybuddy.Model.Transaction;
@@ -21,6 +22,9 @@ import static org.mockito.Mockito.*;
 public class TransactionServiceTest {
     @Mock
     TransactionDao transactionDao;
+
+    @Mock
+    UserDao userDao;
 
     @InjectMocks
     TransactionService transactionService;
@@ -45,9 +49,12 @@ public class TransactionServiceTest {
         transactionDto.setStatus(Transaction.STATUS_IS_OK);
         transactionDto.setDescription("Pour achat de marchandise");
         transactionDto.setUserId(1L);
-        transactionDto.setUserId(2L);
+        transactionDto.setContactId(2L);
         transactionDto.setAmount(10000D);
+        when(userDao.findById(1L)).thenReturn(new User(1L, "kone", "ben", "12345", "fo@dg.com", 100000D, "hey"));
+
         transactionService.saveTransaction(transactionDto);
+
         verify(transactionDao, times(1)).save(transactionDto);
     }
 }
