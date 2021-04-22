@@ -100,6 +100,18 @@
             <artifactId>maven-assembly-plugin</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <reporting>
         <plugins>
@@ -213,19 +225,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <!-- Sets the path to the file which contains the execution data. -->
-                            <dataFile>target/jacoco.exec</dataFile>
-                            <!-- Sets the output directory for the code coverage report. -->
-                            <outputDirectory>target/jacoco-ut</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
