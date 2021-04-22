@@ -1,6 +1,7 @@
 package com.paymybuddy.paymybuddy.Dao;
 
 import com.paymybuddy.paymybuddy.Dto.TransactionDto;
+import com.paymybuddy.paymybuddy.Model.Transaction;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -38,8 +39,8 @@ public class TransactionDaoTest {
                 .build();
 
         TransactionDto transactionDto = new TransactionDto();
-        transactionDto.setType("DEBIT");
-        transactionDto.setStatus("DEBIT");
+        transactionDto.setType(Transaction.TYPE_TRANSFER);
+        transactionDto.setStatus(Transaction.STATUS_IS_OK);
         transactionDto.setDescription("Pour achat de marchandise");
         transactionDto.setUserId(1L);
         transactionDto.setContactId(2L);

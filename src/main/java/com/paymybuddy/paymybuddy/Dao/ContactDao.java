@@ -22,7 +22,7 @@ public class ContactDao extends JdbcDaoSupport {
         Object[] params = new Object[]{userId};
 
         return (getJdbcTemplate() != null ?
-                getJdbcTemplate().query(ContactMapper.BASE_SQL  + " where c.user_id = ?", new ContactMapper(), params)
+                getJdbcTemplate().query(ContactMapper.BASE_SQL  + " where c.owner_id = ?", new ContactMapper(), params)
                 : null);
     }
 }

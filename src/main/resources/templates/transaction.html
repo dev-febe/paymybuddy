@@ -12,11 +12,11 @@
         <a class="navbar-brand brand" href="#">Pay My buddy</a>
         <div>
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="#">Home </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="@{/transfer}">Transfer </a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" th:href="@{/transactions}">Transfer </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profile </a>
@@ -47,7 +47,19 @@
         </div>
         <div class="pt-5 pb-5 bg-light">
             <form class="form-inline justify-content-center" method="post" th:action="@{/transactions}" th:object="${transaction}">
-            <select th:field="*{contactId}" class="form-control m-2" aria-label="Default select example">
+                <div class="col-12">
+                    <div th:if="${confirm}" class="alert alert-success" role="alert" >
+                        <span>Confirmed transfer</span>
+                    </div>
+                    <div class="alert alert-danger" role="alert" th:if="${isBalanceInsufficient}"  >
+                        <span>Balance insufficient</span>
+                    </div>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('amount') || #fields.hasErrors('description')}"  >
+                        <span th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></span>
+                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                    </div>
+                </div>
+                <select th:field="*{contactId}" class="form-control m-2" aria-label="Default select example">
                 <option selected value="0">Select a connection</option>
                 <option th:each="connection :${connections}"
                         th:text="${connection.name}" th:value="${connection.id}">One
@@ -73,10 +85,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="transaction: ${transactions}">
-                    <td><span th:text="${transaction.contact.name}"></span></td>
-                    <td><span th:text="${transaction.description}"></span></td>
-                    <td><span th:text="${transaction.amount}"></span>€</td>
+                <tr th:each="trans: ${transactions}">
+                    <td><span th:text="${trans.contact.name}"></span></td>
+                    <td><span th:text="${trans.description}"></span></td>
+                    <td><span th:text="${trans.amount}"></span>€</td>
                 </tr>
                 </tbody>
             </table>

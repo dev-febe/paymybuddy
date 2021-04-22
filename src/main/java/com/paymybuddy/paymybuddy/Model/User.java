@@ -14,7 +14,7 @@ public class User implements UserDetails {
     private String lastName;
     private String password;
     private String email;
-    private String balance;
+    private Double balance;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -43,7 +43,7 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(Long id, String firstName, String lastName, String password, String email, String balance, String username) {
+    public User(Long id, String firstName, String lastName, String password, String email, Double balance, String username) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
